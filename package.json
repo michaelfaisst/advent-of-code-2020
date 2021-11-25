@@ -5,7 +5,8 @@
   "author": "Michael Faißt <michael@codenite.at>",
   "license": "ISC",
   "scripts": {
-    "day1": "ts-node day1/index.ts"
+    "day1": "ts-node day1/index.ts",
+    "day2": "ts-node day2/index.ts"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",
