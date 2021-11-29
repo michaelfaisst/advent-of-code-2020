@@ -11,7 +11,10 @@
     "day4": "ts-node day4/index.ts",
     "day5": "ts-node day5/index.ts",
     "day6": "ts-node day6/index.ts",
-    "day7": "ts-node day7/index.ts"
+    "day7": "ts-node day7/index.ts",
+    "day8": "ts-node day8/index.ts",
+    "day9": "ts-node day9/index.ts",
+    "day10": "ts-node day10/index.ts"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",
