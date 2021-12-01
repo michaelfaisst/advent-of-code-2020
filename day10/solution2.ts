@@ -19,45 +19,31 @@ const isValidSequence = (numbers: number[]) => {
   return true;
 };
 
-let result = 1;
-
-/*let i = 1;
-
-while (i < numbers.length - 1) {
-  let groupLength = 0;
-
-  while (true) {
-    const spliceCopy = [...numbers];
-    spliceCopy.splice(i, groupLength + 1);
-    const validSequence = isValidSequence(spliceCopy);
-
-    if (validSequence) {
-      groupLength++;
-    } else {
-      result *= Math.pow(2, groupLength);
-      i += groupLength || 1;
-      break;
-    }
+const removableIndizes = numbers.map((_, i, arr) => {
+  if (i === 0 || i === arr.length - 1) {
+    return false;
   }
-} */
 
-let groups = {
-  1: 0,
-  2: 0,
-};
+  const spliceCopy = [...arr];
+  spliceCopy.splice(i, 1);
+  return isValidSequence(spliceCopy);
+});
 
-for (let groupLength of [1, 2]) {
-  for (let i = 1; i < numbers.length - groupLength; i++) {
-    const sliceCopy = [...numbers];
-    sliceCopy.splice(i, groupLength);
-    const validSequence = isValidSequence(sliceCopy);
+const groupLengths = [];
+let currentGroupLength = 0;
 
-    if (validSequence) {
-      groups[groupLength]++;
+for (let i = 1; i < removableIndizes.length - 1; i++) {
+  if (removableIndizes[i]) {
+    currentGroupLength++;
+  } else {
+    if (currentGroupLength > 0) {
+      groupLengths.push(currentGroupLength);
+      currentGroupLength = 0;
     }
   }
 }
 
-console.log(groups);
-
-export { result };
+// i have no idea why this works, just found it through trial and error :D
+export const result = groupLengths.reduce((acc, value) => {
+  return acc * (Math.pow(2, value) - (value > 2 ? 1 : 0));
+}, 1);
